@@ -1,7 +1,6 @@
 __author__ = 'Roee Gilron'
 import numpy as np
 import numpy.matlib as npm
-import scipy
 
 def printMatrix(mat,text):
     print(text + "\n")
@@ -48,7 +47,7 @@ def calcmultit(data, labels):
         raise NameError('The length of labels isn''t equal to the number of rows in data, check your inputs')
 
     #check labels for exception
-    checkLabelsForExceptions(labels)
+    # checkLabelsForExceptions(labels)
 
     #compute delta of according to labels
     uniqlabels = np.unique(labels)
@@ -56,13 +55,21 @@ def calcmultit(data, labels):
     idxlabelsB = np.where(uniqlabels[1] == labels)
     print idxlabelsA
     print idxlabelsB
-    # print data
 
-    delta = data[idxlabelsA,:] - data[idxlabelsB,:]
-    printMatrix(delta,'delta')
-    print '\n'
-    print np.size(delta,0)
-    print np.size(delta,0)
+    # print data
+    np.asarray(data)
+    printMatrix(data,"data")
+    printMatrix(data[idxlabelsA[0],:],'idxs a ')
+    printMatrix(data[idxlabelsB[0],:],'idxs b ')
+    #
+    # printMatrix(delta,'delta')
+    # print '\n'
+    # print np.size(delta,0)
+    # print np.size(delta,0)
+
+    # delta = data[idxlabelsA,:] - data[idxlabelsB,:]
+    delta = data
+
     # check delta for exceptions:
     # checkDeltaForExceptions(delta)
 
