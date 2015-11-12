@@ -39,39 +39,35 @@ def calcmultit(data, labels):
     @param array labels: an array of trial labels, must be balanced (equal number of trials labels from class A and B)
     :return:
     """
-    # printMatrix(data,"data")
-    # printMatrix(labels,'labels')
-    # printMatrix(np.unique(labels),'unique labels')
-
     if np.size(labels,0) != np.size(data,0):
         raise NameError('The length of labels isn''t equal to the number of rows in data, check your inputs')
 
     #check labels for exception
-    # checkLabelsForExceptions(labels)
+    checkLabelsForExceptions(labels)
 
-    #compute delta of according to labels
+    #compute delta according to labels
     uniqlabels = np.unique(labels)
-    idxlabelsA = np.where(uniqlabels[0] == labels)
-    idxlabelsB = np.where(uniqlabels[1] == labels)
+    idxlabelsA = np.where(uniqlabels[0] == labels)[0]
+    idxlabelsB = np.where(uniqlabels[1] == labels)[0]
     print idxlabelsA
     print idxlabelsB
 
     # print data
     np.asarray(data)
     printMatrix(data,"data")
-    printMatrix(data[idxlabelsA[0],:],'idxs a ')
-    printMatrix(data[idxlabelsB[0],:],'idxs b ')
+    printMatrix(data[idxlabelsA,:],'idxs a ')
+    printMatrix(data[idxlabelsB,:],'idxs b ')
     #
     # printMatrix(delta,'delta')
     # print '\n'
     # print np.size(delta,0)
     # print np.size(delta,0)
 
-    # delta = data[idxlabelsA,:] - data[idxlabelsB,:]
-    delta = data
+    delta = data[idxlabelsA,:] - data[idxlabelsB,:]
+
 
     # check delta for exceptions:
-    # checkDeltaForExceptions(delta)
+    checkDeltaForExceptions(delta)
 
     # calc N,n and p
     N = np.size(delta,0)
