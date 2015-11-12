@@ -14,6 +14,7 @@ if __name__ == '__main__':
     delta[3 , 0] = 0.7
     delta[3 , 1] = 0.8
 
-    delta = np.loadtxt("/Users/Roee/Documents/MATLAB/pytest.txt")
-    mT = calcMt(delta)
+    data = np.loadtxt("/Users/Roee/Documents/MATLAB/pydata.txt")
+    labels = np.loadtxt("/Users/Roee/Documents/MATLAB/pylabels.txt")
+    mT = calcMt(data,labels)
     print(mT)

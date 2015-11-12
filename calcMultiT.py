@@ -1,4 +1,4 @@
-__author__ = 'Roee'
+__author__ = 'Roee Gilron'
 import numpy as np
 import numpy.matlib as npm
 import scipy
@@ -14,20 +14,57 @@ def checkDeltaForExceptions(delta):
     if (~delta.any(axis=0)).any():
         raise NameError('You have one or more column (feature) that has all zeros ')
 
-def calcmultit(delta):
+def checkLabelsForExceptions(labels):
+    if np.size(labels,0)<=6:
+        raise NameError('You do not have enough trials (observations), the min. is 3 from each class')
+    # check that you have a balanced classes, and at least 3 observations / class
+    uniqlabels = np.unique(labels)
+    if np.size(uniqlabels) > 2:
+        raise NameError('Currently we only support 2 classes')
+    # check that oyu have equal number of labels
+    countlabelsA = np.size(np.where(uniqlabels[0] == labels),0)
+    countlabelsB = np.size(np.where(uniqlabels[1] == labels),0)
+
+    if countlabelsA != countlabelsB:
+        raise NameError('You do not have an equal number of labels from each class')
+
+
+def calcmultit(data, labels):
     """
     This function recieves as input an array and calculates the multivariate-T value as described in:
 
     Srivastava, M. S. and M. Du (2008). "A test for the mean vector with fewer observations than the dimension."
     Journal of Multivariate Analysis 99(3): 386-402.
 
-    @param array delta: an array of numbers, with at least 3 rows, no zero columns
+    @param array data: an array of numbers, with at least 6 rows (3 trials), no zero columns
+    @param array labels: an array of trial labels, must be balanced (equal number of trials labels from class A and B)
     :return:
     """
+    # printMatrix(data,"data")
+    # printMatrix(labels,'labels')
+    # printMatrix(np.unique(labels),'unique labels')
 
+    if np.size(labels,0) != np.size(data,0):
+        raise NameError('The length of labels isn''t equal to the number of rows in data, check your inputs')
 
-    checkDeltaForExceptions(delta)
-    # printMatrix(delta,'delta')
+    #check labels for exception
+    checkLabelsForExceptions(labels)
+
+    #compute delta of according to labels
+    uniqlabels = np.unique(labels)
+    idxlabelsA = np.where(uniqlabels[0] == labels)
+    idxlabelsB = np.where(uniqlabels[1] == labels)
+    print idxlabelsA
+    print idxlabelsB
+    # print data
+
+    delta = data[idxlabelsA,:] - data[idxlabelsB,:]
+    printMatrix(delta,'delta')
+    print '\n'
+    print np.size(delta,0)
+    print np.size(delta,0)
+    # check delta for exceptions:
+    # checkDeltaForExceptions(delta)
 
     # calc N,n and p
     N = np.size(delta,0)
