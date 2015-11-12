@@ -16,7 +16,7 @@ def checkDeltaForExceptions(delta):
 
 def calcmultit(delta):
     """
-    This function recieved as input an array and calculates the multivariate-T value as described in:
+    This function recieves as input an array and calculates the multivariate-T value as described in:
 
     Srivastava, M. S. and M. Du (2008). "A test for the mean vector with fewer observations than the dimension."
     Journal of Multivariate Analysis 99(3): 386-402.
