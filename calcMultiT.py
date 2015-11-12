@@ -39,30 +39,19 @@ def calcmultit(data, labels):
     @param array labels: an array of trial labels, must be balanced (equal number of trials labels from class A and B)
     :return:
     """
+    # initial check to make sure that data and labels fit
     if np.size(labels,0) != np.size(data,0):
         raise NameError('The length of labels isn''t equal to the number of rows in data, check your inputs')
 
     #check labels for exception
     checkLabelsForExceptions(labels)
 
-    #compute delta according to labels
+    #get unique labels
     uniqlabels = np.unique(labels)
     idxlabelsA = np.where(uniqlabels[0] == labels)[0]
     idxlabelsB = np.where(uniqlabels[1] == labels)[0]
-    print idxlabelsA
-    print idxlabelsB
 
-    # print data
-    np.asarray(data)
-    printMatrix(data,"data")
-    printMatrix(data[idxlabelsA,:],'idxs a ')
-    printMatrix(data[idxlabelsB,:],'idxs b ')
-    #
-    # printMatrix(delta,'delta')
-    # print '\n'
-    # print np.size(delta,0)
-    # print np.size(delta,0)
-
+    # ccompute delta of data
     delta = data[idxlabelsA,:] - data[idxlabelsB,:]
 
 

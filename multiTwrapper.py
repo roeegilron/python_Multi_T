@@ -1,6 +1,6 @@
 import numpy as np
 
-from multivariatet.calcMultiT import calcmultit as calcMt
+from calcMultiT import calcmultit as calcMt
 
 
 if __name__ == '__main__':
@@ -14,7 +14,7 @@ if __name__ == '__main__':
     delta[3 , 0] = 0.7
     delta[3 , 1] = 0.8
 
-    data = np.loadtxt("/Users/Roee/Documents/MATLAB/pydata.txt")
-    labels = np.loadtxt("/Users/Roee/Documents/MATLAB/pylabels.txt")
+    data = np.loadtxt("D:\Roee\Downloads\temp\pydata.txt")
+    labels = np.loadtxt("D:\Roee\Downloads\temp\pylabels.txt")
     mT = calcMt(data,labels)
     print(mT)
